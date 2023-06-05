@@ -1,5 +1,9 @@
 <template>
 	<view class="content">
+		<test></test>
+		<uni-rate></uni-rate>
+		<uni-badge text="1"></uni-badge>
+		<uni-badge text="3" type="primary" :inverted="true"></uni-badge>
 		<image class="logo" src="/static/logo.png"></image>
 		<view>
 			<text class="title">{{title}}</text>
@@ -11,7 +15,7 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: 'Hello uni'
 			}
 		},
 		onLoad() {
@@ -23,7 +27,7 @@
 	}
 </script>
 
-<style>
+<style lang='scss'>
 	.content {
 		display: flex;
 		flex-direction: column;
