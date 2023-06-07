@@ -12,14 +12,16 @@
 </template>
 
 <script>
+	import { ocr } from '@/server/basic';
+
 	export default {
 		data() {
 			return {
-				title: 'Hello uni'
+				title: 'hello uni'
 			}
 		},
 		onLoad() {
-
+			// ocr({ key: 'val' });
 		},
 		methods: {
 
