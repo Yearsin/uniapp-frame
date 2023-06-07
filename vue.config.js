@@ -2,6 +2,6 @@
 module.exports = {
     transpileDependencies:['@dcloudio/uni-ui'],
     devServer: {
-        disableHostCheck: true
+        allowedHosts: 'all' // 允许访问的主机列表
     }
 }

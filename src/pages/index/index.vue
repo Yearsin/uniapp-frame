@@ -12,7 +12,7 @@
 </template>
 
 <script>
-	import { ocr } from '@/server/basic';
+	// import { ocr } from '@/server/basic';
 
 	export default {
 		data() {

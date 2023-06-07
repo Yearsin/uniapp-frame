@@ -2,8 +2,8 @@
 	export default {
 		globalData: {
 			envsUrl: {
-				prod: "https://bffappservice-pro-api.fhb56.com/v1.0",
-				uat: "https://bffappservice-uat-api.fhb56.com/v1.0"
+				prod: "https://xx-pro-api.xx.com/v1.0",
+				uat: "https://xx-uat-api.xx.com/v1.0"
 			},
 			env: 'uat'
 		},
