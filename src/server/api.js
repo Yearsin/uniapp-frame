@@ -1,10 +1,11 @@
 const basic = {
     ocr: '/CommonOCR/BusinessLicense'
 }
-const login = {
-    
+const user = {
+    login: 'http://v.juhe.cn/toutiao/index'
 }
 
 module.exports = {
-    basic
+    basic,
+    user
 }
