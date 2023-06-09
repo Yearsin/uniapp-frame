@@ -7,19 +7,19 @@ const getUrl = (url) => {
 };
 
 // 请求拦截器
-const requestInterceptor = ({ url = '', param = {}, ...other } = {}) => {
-
-    other.header.token = uni.getStorageSync('token'); // 请求携带token
-    !other.header.hideLoading && uni.showLoading({
-        title: '加载中',
-        mask: true
-    });
-
-    return config = {
+const requestInterceptor = ({ url = '', param = {}, ...other }) => {
+    const { method, hideLoading } = other;
+    !hideLoading && uni.showLoading({ title: '加载中', mask: true });
+    const config = {
         url: getUrl(url),
         data: param,
-        ...other
-    };
+        method,
+        header: {
+            token: uni.getStorageSync('token') || ''
+        }
+    }
+    method !== 'GET' && (config.header['content-type'] = other['content-type'] || 'application/json;charset=UTF-8');
+    return { config, other };
 }
 
 // 响应拦截器
@@ -44,11 +44,11 @@ const responseInterceptor = (response) => {
 
 // 基础网络请求封装
 const http = (options) => {
-    options = requestInterceptor(options);
+    const { config, other } = requestInterceptor(options);
     return new Promise((resolve, reject) => {
 
         const httpTask = uni.request({
-            ...options,
+            ...config,
             complete: (res) => {
                 uni.hideLoading();
                 try {
@@ -59,66 +59,31 @@ const http = (options) => {
                 }
             }
         })
-        if (options.header.cb) {
-            options.header.cb(httpTask);
+        // 中断当前请求任务
+        if (other.cb) {
+            other.cb(httpTask);
         }
     })
 }
 
 // get
-const _GET = (url, param = {}, headers) => {
-    const _headers = headers || {};
-    return http({
-        url,
-        param,
-        method: 'GET',
-        header: {
-            hideLoading: _headers.hideLoading, // 设置是否隐藏Loading弹层，模式显示
-            cb: headers.cb
-        }
-    });
+const _GET = (url, param = {}, other) => {
+    return http({ url, param,  method: 'GET',  ...other })
 };
 
 // post
-const _POST = (url, param = {}, headers) => {
-    const _headers = headers || {};
-    return http({
-        url,
-        param,
-        method: 'POST',
-        header: {
-            'content-type': _headers['content-type'] || 'application/json;charset=UTF-8', // 默认值 ,另一种是 "content-type": "application/x-www-form-urlencoded"
-            hideLoading: _headers.hideLoading // 设置是否隐藏Loading弹层，模式显示
-        }
-    })
+const _POST = (url, param = {}, other) => {
+    return http({ url, param,  method: 'POST',  ...other })
 };
 
 // put
-const _PUT = (url, param = {}, headers) => {
-    const _headers = headers || {};
-    return http({
-        url,
-        param,
-        method: 'PUT',
-        header: {
-            'Content-Type': _headers['Content-Type'] || 'application/json;charset=UTF-8', // 默认值 ,另一种是 "content-type": "application/x-www-form-urlencoded"
-            hideLoading: _headers.hideLoading
-        }
-    })
+const _PUT = (url, param = {}, other) => {
+    return http({ url, param,  method: 'PUT',  ...other })
 };
 
 // delete
-const _DELETE = (url, param = {}, headers) => {
-    let _headers = headers || {};
-    return http({
-        url,
-        param,
-        method: 'DELETE',
-        header: {
-            'Content-Type': _headers['Content-Type'] || 'application/json;charset=UTF-8', // 默认值 ,另一种是 "content-type": "application/x-www-form-urlencoded"
-            Loading: _headers.Loading
-        }
-    })
+const _DELETE = (url, param = {}, other) => {
+    return http({ url, param,  method: 'DELETE',  ...other })
 };
 
 module.exports = {

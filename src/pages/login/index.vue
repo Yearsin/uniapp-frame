@@ -13,9 +13,8 @@ export default {
         }
     },
     onLoad() {
-        login('', (task) =>{
-            // 取消网络请求
-            console.log('task', task)
+        login(task => {
+            console.log(task);
             task.abort();
         }).then(res => {
             console.log(res, 'res')
