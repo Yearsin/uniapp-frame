@@ -9,10 +9,11 @@ module.exports = {
         uni: "readonly",
         plus: "readonly",
         wx: "readonly",
+        getApp: true
     },
     extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
     parserOptions: {
-        parser: "babel-eslint",
+        parser: '@babel/eslint-parser'
     },
     rules: {
         eqeqeq: [
@@ -22,6 +23,7 @@ module.exports = {
                 null: "ignore",
             }
         ],
-        semi: ["error", "never"],
+        'vue/multi-word-component-names': 0,
+        semi: ["error", "never"]
     }
 };
