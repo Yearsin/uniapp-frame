@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <fhb-test></fhb-test>
+    <test></test>
     <uni-rate></uni-rate>
     <uni-badge text="1"></uni-badge>
     <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
