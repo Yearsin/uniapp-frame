@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import './uni.promisify.adaptor'
+import "./static/styles/iconfont.css";
 
 Vue.config.productionTip = false
 

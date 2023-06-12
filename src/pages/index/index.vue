@@ -5,6 +5,7 @@
     <uni-badge text="1"></uni-badge>
     <uni-badge text="3" type="primary" :inverted="true"></uni-badge>
     <image class="logo" src="/static/logo.png"></image>
+    <text class="iconfont icon-close"></text>
     <view>
       <text class="title">{{ title }}</text>
     </view>
