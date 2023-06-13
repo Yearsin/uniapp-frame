@@ -11,6 +11,12 @@
 			"style": {
 				"navigationBarTitleText": "login"
 			}
+		},
+		{
+			"path": "pages/demo/index",
+			"style": {
+				"navigationBarTitleText": "demo"
+			}
 		}
 	],
 	// "tabBar": {

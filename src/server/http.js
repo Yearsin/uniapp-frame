@@ -18,8 +18,7 @@ const requestInterceptor = ({ url = '', param = {}, ...option }) => {
       token: uni.getStorageSync('token') || ''
     }
   }
-  method !== 'GET' &&
-    (config.header['content-type'] = option['content-type'] || 'application/json;charset=UTF-8')
+  method !== 'GET' && (config.header['content-type'] = option['content-type'] || 'application/json;charset=UTF-8')
   return { config, option }
 }
 
